@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from . import WordProcess, QueryProcessing
 # Create your views here.
 
@@ -10,6 +10,9 @@ def home(request):
     return render(request, 'search/home.html')
 
 def search(request):
+
+    if 'keyword' not in request.GET:
+        return HttpResponseRedirect("/")
 
     search_query = request.GET['keyword']
     processed_query = processedDoc.processString(search_query)
