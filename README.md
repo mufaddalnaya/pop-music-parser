@@ -7,9 +7,9 @@ The algorithm used for searching queries is based on the Cosine Similarity betwe
 
 Documentation of Specific classes:
 <ol>
-<li><b>QueryProcessing.py : </b> It containes the algorithm for calulating cosine similairty of the query with the corpus.</li>
-<li><b>WordProcess.py : </b> It contains the code for processing the document as well as the queries. It consists of 5 steps as mentioned in the comments of the file.</li>
-<li><b>Documents.py : </b> Contains corpus of 10 documents.</li>
+<li><b><a href="https://github.com/mufaddalnaya/SearchEngine/blob/master/search/QueryProcessing.py">QueryProcessing.py</a> : </b> It containes the algorithm for calulating cosine similairty of the query with the corpus.</li>
+<li><b><a href="https://github.com/mufaddalnaya/SearchEngine/blob/master/search/WordProcess.py">WordProcess.py </a> : </b> It contains the code for processing the document as well as the queries. It consists of 5 steps as mentioned in the comments of the file.</li>
+<li><b><a href="https://github.com/mufaddalnaya/SearchEngine/blob/master/search/Documents.py">Documents.py </a>: </b> Contains corpus of 10 documents.</li>
 </ol>
 
 The Projects contains 2 routes, First one is the homepage("/") and the second is the search("/search").
