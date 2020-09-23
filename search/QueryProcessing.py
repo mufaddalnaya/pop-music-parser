@@ -39,19 +39,20 @@ class QueryProcessing:
         return result            
 
     def calculateCosine(self, query_vector, doc_vector):
-        dominant_q = 0.0
+        determinant_q = 0.0
         for val in query_vector:
-            dominant_q = dominant_q+val*val
-        dominant_q = math.sqrt(dominant_q)    
-        dominant_v = 0.0
+            determinant_q = determinant_q+val*val
+        determinant_q = math.sqrt(determinant_q)    
+        determinant_v = 0.0
         for val in doc_vector:
-            dominant_v = dominant_v + val*val 
-        dominant_v = math.sqrt(dominant_v)
+            determinant_v = determinant_v + val*val 
+        determinant_v = math.sqrt(determinant_v)
         numerator = 0.0
         for x in range(len(doc_vector)):
             numerator = numerator+query_vector[x]*doc_vector[x]
-        if dominant_q == 0.0 or dominant_v == 0.0:
+        denominator = determinant_q*determinant_v    
+        if denominator == 0.0:
             return 0.0
-        cosine = numerator/(dominant_q*dominant_v)
+        cosine = numerator/denominator
         return cosine      
 
