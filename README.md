@@ -8,7 +8,7 @@ The algorithm used for searching queries is based on the Cosine Similarity betwe
 Documentation of Specific classes:
 <ol>
 <li><b><a href="https://github.com/mufaddalnaya/SearchEngine/blob/master/search/QueryProcessing.py">QueryProcessing.py</a> : </b> It containes the algorithm for calulating cosine similairty of the query with the corpus.</li>
-<li><b><a href="https://github.com/mufaddalnaya/SearchEngine/blob/master/search/WordProcess.py">WordProcess.py </a> : </b> It contains the code for processing the document as well as the queries. It consists of 5 steps as mentioned in the comments of the file.</li>
+<li><b><a href="https://github.com/mufaddalnaya/SearchEngine/blob/master/search/WordProcess.py">WordProcess.py </a> : </b> It contains the code for processing the document as well as the search queries. It consists of 5 steps as mentioned in the comments of the file.</li>
 <li><b><a href="https://github.com/mufaddalnaya/SearchEngine/blob/master/search/Documents.py">Documents.py </a>: </b> Contains corpus of 10 documents.</li>
 </ol>
 
