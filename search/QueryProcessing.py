@@ -50,7 +50,7 @@ class QueryProcessing:
             self.docVectors.append(docVector)    
     
 
-    def query(self, search_query):
+    def query(self, search_query, total_clicks, song_clicks):
         query_title_vector = [0]*len(self.title_words_list)
         for word in search_query:
             if word in self.title_indexes:
@@ -64,8 +64,12 @@ class QueryProcessing:
         for docVector in self.docVectors:
             title_cosine = self.calculateCosine(query_title_vector, docVector['title'])
             body_cosine = self.calculateCosine(query_body_vector, docVector['body'])
-            weighted_cosine = 0.3*title_cosine + 0.7*body_cosine
+            weighted_cosine = 0.4*title_cosine + 0.5*body_cosine
+            # if docVector['id'] == 36 or docVector['id'] == 97:
+            #     print(title_cosine, body_cosine, docVector['id'])
             if weighted_cosine != 0.0:
+                if total_clicks != 0:
+                    weighted_cosine = weighted_cosine + 0.1*(song_clicks[docVector['id']]/total_clicks)
                 result.append({'weighted_cosine':weighted_cosine, 'id':docVector['id']})
         result = sorted(result, key = lambda i: -i['weighted_cosine'])
         return result

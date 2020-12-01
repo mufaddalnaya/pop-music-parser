@@ -50,7 +50,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'SearchEngine.urls'
+ROOT_URLCONF = 'PopMusic.urls'
 
 TEMPLATES = [
     {
@@ -68,7 +68,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'SearchEngine.wsgi.application'
+WSGI_APPLICATION = 'PopMusic.wsgi.application'
 
 
 # Database

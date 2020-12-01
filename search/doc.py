@@ -3842,6 +3842,8 @@ Don't even trip
 Just lay back and drink that
 
 '''},
+
+		97: {'artist':'rgd', 'id':97, 'title':'love', 'lyrics':'Hello how are you, love'},
 		98: 		{ 'artist': '''50 Cent''',
 		 'id': 98,
 		  'title': '''Candy Shop''',
