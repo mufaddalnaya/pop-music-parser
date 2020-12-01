@@ -1,4 +1,4 @@
-from . import Documents, stopwords
+from . import doc, stopwords
 
 class WordProcess:
     def __init__(self):
@@ -13,15 +13,12 @@ class WordProcess:
 
         self.freq_dist = []
         self.processed_doc = []
-        for topic in self.doc:
-            new_doc = []
-            for docs in topic: 
-                lyrics = {}
-                lyrics['title'] = self.processString(docs['lyrics'])
-                lyrics['body'] = self.processString(docs['body'])
-                lyrics['id'] = docs['id']
-                new_doc.append(lyrics)
-            self.processed_doc.append(new_doc)  
+        for id, docs in self.doc.items(): 
+            lyrics = {}
+            lyrics['title'] = self.processString(docs['title'])
+            lyrics['body'] = self.processString(docs['lyrics'])
+            lyrics['id'] = docs['id']
+            self.processed_doc.append(lyrics)  
 
     def processString(self, docs):
         splitted_doc = self.split(self.remove_punc(docs.replace("\n", "").replace("\xa0","").replace("\t","")))
@@ -88,6 +85,6 @@ class WordProcess:
         
 
     def getDocs(self):
-        return Documents.getDocs()
+        return doc.getLyrics()
 
     

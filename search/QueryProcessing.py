@@ -1,12 +1,12 @@
-import math  
+import math
+from . import doc  
 
 class QueryProcessing:
 
-    def __init__(self, topics):
+    def __init__(self, lyrics):
         self.docs = []
-        for topic in topics:
-            for doc in topic:
-                self.docs.append(doc)
+        for doc in lyrics:
+            self.docs.append(doc)
             
         self.title_words = set()
         for lyrics in self.docs:

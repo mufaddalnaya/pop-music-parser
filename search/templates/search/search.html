@@ -45,12 +45,15 @@
         <div class="container" style="margin-top: 100px;">
             <div class="jumbotron">
                 <center>
-                    <h1> Result to the Query {{ search_query }}</h1>
+                    <form action="search" method="GET">
+                        <input type=text name="keyword" value="{{ search_query }}">
+                        <input type='submit' value="GO">
+                    </form>
                     <p>Total Documents Found are {{ totalDocs }} in 0.0001s </p>
                 </center>
                 <ol>
                     {% for doc in documents %}
-                        <li> <b> Cosine Value = {{ doc.cosine }}, Document = </b> {{ doc.doc     }}</li>
+                       <a href = "/song?id={{ doc.id }}"><li> <b> Cosine Value = {{ doc.weighted_cosine }}, Document = </b> {{ doc.title }}, Artist = {{ doc.artist}} </li></a>
                     {% endfor %}
                 </ol>
             </div>
