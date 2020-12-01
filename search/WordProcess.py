@@ -1,4 +1,3 @@
-import docx
 from . import Documents, stopwords
 
 class WordProcess:
@@ -20,7 +19,7 @@ class WordProcess:
                 lyrics = {}
                 lyrics['title'] = self.processString(docs['lyrics'])
                 lyrics['body'] = self.processString(docs['body'])
-                lyrics['id'] = docs['id'];
+                lyrics['id'] = docs['id']
                 new_doc.append(lyrics)
             self.processed_doc.append(new_doc)  
 
@@ -30,13 +29,6 @@ class WordProcess:
         stop_word_removed = self.remove_stopwords(lowercase_doc)
         stemming_doc = self.stem(stop_word_removed)
         return stemming_doc
-
-    def getText(self, filename):
-        doc = docx.Document(filename)
-        fullText = []
-        for para in doc.paragraphs:
-            fullText.append(para.text)
-        return '\n'.join(fullText)
 
     # Removing punctuations in string 
     def remove_punc(self, str):
