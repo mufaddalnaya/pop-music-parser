@@ -80,27 +80,27 @@ def getLyrics(artist, song):
         l = [x.getText() for x in l]
         return l
 
-print(getArtists("b"))
+# print(getArtists("b"))
 
-# id = 1
-# for char in ascii_lowercase:
-#     print(char)
-#     artists = getArtists(char)
-#     print(artists)
-#     for artist in artists:
-#         all_songs = getSongs(artist)
-#         for album, songs in all_songs['albums'].items():
-#             for song in songs:
-#                 wd = getLyrics(artist, song)
-#                 f = open("doc"+str(id)+".py", "w")
-#                 f.write("def getLyrics():\n")
-#                 f.write("\tartist='"+artist+"'\n")
-#                 f.write("\talbum='"+album+"'\n")
-#                 f.write("\tlyrics=[")
-#                 for line in wd:
-#                     f.write("'"+line+"',")
-#                 f.write("]")    
-#                 id = id + 1
+id = 1
+for char in ascii_lowercase:
+    print(char)
+    artists = getArtists(char)
+    print(artists)
+    for artist in artists:
+        all_songs = getSongs(artist)
+        for album, songs in all_songs['albums'].items():
+            for song in songs:
+                wd = getLyrics(artist, song)
+                f = open("doc"+str(id)+".py", "w")
+                f.write("def getLyrics():\n")
+                f.write("\tartist='"+artist+"'\n")
+                f.write("\talbum='"+album+"'\n")
+                f.write("\tlyrics=[")
+                for line in wd:
+                    f.write("'"+line+"',")
+                f.write("]")    
+                id = id + 1
                     
 
 
