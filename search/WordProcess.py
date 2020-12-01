@@ -16,8 +16,12 @@ class WordProcess:
         self.processed_doc = []
         for topic in self.doc:
             new_doc = []
-            for docs in topic:
-                new_doc.append(self.processString(docs))
+            for docs in topic: 
+                lyrics = {}
+                lyrics['title'] = self.processString(docs['lyrics'])
+                lyrics['body'] = self.processString(docs['body'])
+                lyrics['id'] = docs['id'];
+                new_doc.append(lyrics)
             self.processed_doc.append(new_doc)  
 
     def processString(self, docs):

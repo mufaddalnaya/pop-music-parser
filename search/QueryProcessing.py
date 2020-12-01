@@ -8,35 +8,67 @@ class QueryProcessing:
             for doc in topic:
                 self.docs.append(doc)
             
-        self.words = set()
+        self.title_words = set()
+        for lyrics in self.docs:
+            for word in lyrics['title']:
+                self.title_words.add(word)
+
+        
+        self.body_words = set()
+        for lyrics in self.docs:
+            for word in lyrics['body']:
+                self.body_words.add(word)
+
+        self.title_words_list = []
+        for word in self.title_words:
+            self.title_words_list.append(word)
+
+        self.body_words_list = []
+        for word in self.body_words:
+            self.body_words_list.append(word)
+
+        self.title_indexes = {}
+        for idx, word in enumerate(self.title_words_list):
+            self.title_indexes[word] = idx
+
+        self.body_indexes = {}
+        for idx, word in enumerate(self.body_words_list):
+            self.body_indexes[word] = idx
+
+        self.docVectors = []
         for doc in self.docs:
-            for word in doc:
-                self.words.add(word)
-        self.words_list = []
-        for word in self.words:
-            self.words_list.append(word)
-        self.indexes = {}
-        for idx, word in enumerate(self.words_list):
-            self.indexes[word] = idx
-        self.docVectors = []        
-        for doc in self.docs:
-            vector = [0]*len(self.words_list)
-            for word in doc:
-                vector[self.indexes[word]] = vector[self.indexes[word]]+1
-            self.docVectors.append(vector)
+            docVector = {}
+            title_vector = [0]*len(self.title_words_list)
+            for word in doc['title']:
+                title_vector[self.title_indexes[word]] = title_vector[self.title_indexes[word]]+1
+            body_vector = [0]*len(self.body_words_list)
+            for word in doc['body']:
+                body_vector[self.body_indexes[word]] = body_vector[self.body_indexes[word]]+1
+            docVector['title'] = title_vector
+            docVector['body'] = body_vector
+            docVector['id'] = doc['id']
+            self.docVectors.append(docVector)    
+    
 
     def query(self, search_query):
-        query_vector = [0]*len(self.words_list)
+        query_title_vector = [0]*len(self.title_words_list)
         for word in search_query:
-            if word in self.indexes:
-                query_vector[self.indexes[word]] = query_vector[self.indexes[word]]+1
+            if word in self.title_indexes:
+                query_title_vector[self.title_indexes[word]] = query_title_vector[self.title_indexes[word]]+1
+
+        query_body_vector = [0]*len(self.body_words_list)
+        for word in search_query:
+            if word in self.body_indexes:
+                query_body_vector[self.body_indexes[word]] = query_body_vector[self.body_indexes[word]]+1
         result = []
-        for idx, docVector in enumerate(self.docVectors):
-            cosine = self.calculateCosine(query_vector, docVector)
-            if cosine != 0.0:
-                result.append({'cosine':cosine, 'doc':self.docs[idx]})
-        result = sorted(result, key = lambda i: -i['cosine'])
-        return result            
+        for docVector in self.docVectors:
+            title_cosine = self.calculateCosine(query_title_vector, docVector['title'])
+            body_cosine = self.calculateCosine(query_body_vector, docVector['body'])
+            weighted_cosine = 0.3*title_cosine + 0.7*body_cosine
+            if weighted_cosine != 0.0:
+                result.append({'weighted_cosine':weighted_cosine, 'id':docVector['id']})
+        result = sorted(result, key = lambda i: -i['weighted_cosine'])
+        return result
 
     def calculateCosine(self, query_vector, doc_vector):
         determinant_q = 0.0
